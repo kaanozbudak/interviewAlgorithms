@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -24,27 +25,36 @@ public class missingNumberInArray
 
     Example:
     Input:
-    2
-    5
-    1 2 3 5
-    10
-    1 2 3 4 5 6 7 8 10
+2
+5
+1 2 3 5
+10
+1 2 3 4 5 6 7 8 10
 
     Output:
     4
     9
      */
-    static Scanner input = new Scanner(System.in);
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static ArrayList<Integer> list = new ArrayList<>();
-    public static void main(String[] args) {
-        int arrayCount = input.nextInt();
+    static ArrayList<Integer> result = new ArrayList<>();
+    public static void main(String[] args) throws IOException {
+        int arrayCount = Integer.parseInt(br.readLine());
         for (int i = 0; i<arrayCount;i++){
-            int sizeOfArray = input.nextInt();
+            int sizeOfArray = Integer.parseInt(br.readLine());
+            String line = br.readLine();
+
+            String[] strs = line.split("\\s+");
+
             for (int j = 0; j<sizeOfArray-1;j++){
-                list.add(input.nextInt());
+                list.add(Integer.parseInt(strs[j]));
             }
-            System.out.println(doWork(list, sizeOfArray));
+            result.add(doWork(list,sizeOfArray));
+
             list.clear();
+        }
+        for (int l:result){
+            System.out.println(l);
         }
     }
     static int doWork(ArrayList<Integer> list, int sizeOfArray) {
